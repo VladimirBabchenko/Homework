@@ -1,3 +1,61 @@
+// Task 2 - increment and getValue; (2 versions)
+
+//ver.2.1
+function getObj(obj, check) {
+  var checkedObj = check(obj);
+  checkedObj.increment = function () {
+    for (var key in checkedObj) {
+      if (typeof checkedObj[key] !== "function") {
+        checkedObj[key] += 1;
+      }
+    }
+    return checkedObj;
+  };
+  checkedObj.getValues = function () {
+    for (var key in checkedObj) {
+      show(key, checkedObj[key]);
+    }
+  };
+  return checkedObj;
+}
+
+function check (obj) {
+  if (!obj || typeof obj !== "object") return Object();
+  return obj;
+}
+
+function show(name, value) {
+  if (typeof value === "function") return;
+  console.log(name + ":" + value);
+}
+
+//ver 2.2
+
+function getObj2(obj, check) {
+  obj.increment =  function () {
+    for (var key in obj) {
+      if (check2(obj[key])) continue;
+      obj[key] += 1;
+    }
+    return obj;
+  };
+  obj.getValues = function () {
+    for (var key in obj) {
+      if (check2(obj[key])) continue;
+      console.log(obj[key])
+    }
+  };
+
+  return obj;
+}
+
+function check2 (obj) {
+  if (typeof obj === "function") return true;
+  return false;
+}
+
+
+
 // Task 1
 
 function calculateAverage() {
@@ -23,7 +81,7 @@ function calculateAverage() {
     var data = verifiedValues(values);
     if (!data) return;
     var arrayNumbers = data.split(",");
-    arrayNumbers.forEach(function(value, i, arr) {
+    arrayNumbers.map(function(value, i, arr) {
       arr[i] = parseInt(value);
     });
       return arrayNumbers;
@@ -31,7 +89,7 @@ function calculateAverage() {
 
   var findAverageValue = function(values, verifyValues) {
     var arrayValues = makeArrayNumbers(values, verifyValues), average, summeryValue = null;
-    arrayValues.map(function(value) {
+    arrayValues.forEach(function(value) {
       summeryValue += value;
     });
     average = summeryValue/arrayValues.length;
@@ -185,7 +243,7 @@ function addUnitInArray() {
         const data = checked(value);
         if (!data) return;
         let arr = data.split(",");
-        arr.forEach(function(value, i, arr) {
+        arr.map(function(value, i, arr) {
            arr[i] = Number.isFinite(parseInt(value)) ? parseInt(value) : value;
         });
         return arr;
@@ -222,19 +280,23 @@ function compareMirrorValues () {
     };
 
     function verifyValues (arr) {
-        const value1 = arr[0];
-        const value2 = arr[1];
-        for (var i = 0; i < value1.length; i++) {
-           if (value1[i] !== ((value2[value2.length-1-i]))) {
-               console.log("Values are not equal");
-               return;
-           }
-        }
-        console.log("Values are equal");
+        const value1 = arr[0].split("");
+        const value2 = arr[1].split("");
+          var result = value1.every(function (value, i, arr) {
+              return parseInt(value) === parseInt(value2[value2.length-1-i])});
+        if (result) return console.log("Values are equal");
+        return console.log( "Values are not equal")
     }
 
     return verifyValues(makeValues());
 }
+
+
+//=====================================================
+
+
+
+
 
 
 
