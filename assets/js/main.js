@@ -3,13 +3,12 @@
 //ver 2.3
 function getObj(obj) {
     var counter = 0;
-    obj.value = counter;
     obj.iteration = function() {
-        return obj.value = counter++;
+        return counter++;
 
     };
     obj.getValue = function() {
-        show(obj.value);
+        show(counter);
     };
     return obj;
 }
