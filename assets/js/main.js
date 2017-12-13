@@ -1,58 +1,77 @@
 // Task 2 - increment and getValue; (2 versions)
 
-//ver.2.1
-function getObj(obj, check) {
-  var checkedObj = check(obj);
-  checkedObj.increment = function () {
-    for (var key in checkedObj) {
-      if (typeof checkedObj[key] !== "function") {
-        checkedObj[key] += 1;
-      }
-    }
-    return checkedObj;
-  };
-  checkedObj.getValues = function () {
-    for (var key in checkedObj) {
-      show(key, checkedObj[key]);
-    }
-  };
-  return checkedObj;
-}
+//ver 2.3
+function getObj(obj) {
+    var counter = 0;
+    obj.iteration = function() {
+        return obj.value = counter++;
 
-function check (obj) {
-  if (!obj || typeof obj !== "object") return Object();
-  return obj;
-}
-
-function show(name, value) {
-  if (typeof value === "function") return;
-  console.log(name + ":" + value);
-}
-
-//ver 2.2
-
-function getObj2(obj, check) {
-  obj.increment =  function () {
-    for (var key in obj) {
-      if (check2(obj[key])) continue;
-      obj[key] += 1;
-    }
+    };
+    obj.value = 0;
+    obj.getValue = function() {
+        show(obj.value);
+    };
     return obj;
-  };
-  obj.getValues = function () {
-    for (var key in obj) {
-      if (check2(obj[key])) continue;
-      console.log(obj[key])
-    }
-  };
-
-  return obj;
 }
 
-function check2 (obj) {
-  if (typeof obj === "function") return true;
-  return false;
+function show(value) {
+    console.log(value);
 }
+
+
+//ver.2.1
+// function getObj(obj, check) {
+//   var checkedObj = check(obj);
+//   checkedObj.increment = function () {
+//     for (var key in checkedObj) {
+//       if (typeof checkedObj[key] !== "function") {
+//         checkedObj[key] += 1;
+//       }
+//     }
+//     return checkedObj;
+//   };
+//   checkedObj.getValues = function () {
+//     for (var key in checkedObj) {
+//       show(key, checkedObj[key]);
+//     }
+//   };
+//   return checkedObj;
+// }
+//
+// function check (obj) {
+//   if (!obj || typeof obj !== "object") return Object();
+//   return obj;
+// }
+//
+// function show(name, value) {
+//   if (typeof value === "function") return;
+//   console.log(name + ":" + value);
+// }
+//
+// //ver 2.2
+//
+// function getObj2(obj, check) {
+//   obj.increment =  function () {
+//     for (var key in obj) {
+//       if (check2(obj[key])) continue;
+//       obj[key] += 1;
+//     }
+//     return obj;
+//   };
+//   obj.getValues = function () {
+//     for (var key in obj) {
+//       if (check2(obj[key])) continue;
+//       console.log(obj[key])
+//     }
+//   };
+//
+//   return obj;
+// }
+//
+// function check2 (obj) {
+//   if (typeof obj === "function") return true;
+//   return false;
+// }
 
 
 //=====================================================
@@ -297,6 +316,17 @@ function compareMirrorValues () {
 
     return verifyValues(makeValues());
 }
+
+//=====================================================
+
+
+
+
+
+
+
+
+
 
 
 
