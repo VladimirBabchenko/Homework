@@ -55,6 +55,13 @@ function check2 (obj) {
 }
 
 
+//=====================================================
+
+// Task 3
+
+function transformToNumber(value) {
+  return parseFloat(value);
+}
 
 // Task 1
 
@@ -292,7 +299,6 @@ function compareMirrorValues () {
 }
 
 
-//=====================================================
 
 
 
