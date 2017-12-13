@@ -236,10 +236,10 @@ function compareMirrorValues () {
     return verifyValues(makeValues());
 }
 
+function makeObject(obj) {
+    if (!obj || typeof obj !== "object") return;
+        obj.maps = function (value, i, arr) {
 
-
-
-
-
-
+    }
+}
 
