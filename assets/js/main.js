@@ -1,5 +1,15 @@
 // Task 2 - increment and getValue; (2 versions)
 
+//ver 2.4
+
+function count() {
+  var n = 0;
+  return {
+    iteration: function() { return n++ },
+    getValue: function() { console.log(n) }
+  }
+}
+
 //ver 2.3
 function getObj(obj) {
     var counter = 0;
@@ -17,15 +27,6 @@ function show(value) {
     console.log(value);
 }
 
-//ver 2.4
-
-function count() {
-  var n = 0;
-  return {
-    iteration: function() { return n++ },
-    getValue: function() { console.log(n) }
-  }
-}
 
 //ver.2.1
 // function getObj(obj, check) {
