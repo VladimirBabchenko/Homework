@@ -1,5 +1,16 @@
 // Task 2 - increment and getValue; (2 versions)
 
+//ver 2.4
+
+function count() {
+  var n = 0;
+  return {
+    iteration: function() { return n++ },
+    reset: function() { return n = 0 },
+    getValue: function() { console.log(n) }
+  }
+}
+
 //ver 2.3
 function getObj(obj) {
     var counter = 0;
