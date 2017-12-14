@@ -6,6 +6,7 @@ function count() {
   var n = 0;
   return {
     iteration: function() { return n++ },
+    reset: function() { return n = 0 },
     getValue: function() { console.log(n) }
   }
 }
