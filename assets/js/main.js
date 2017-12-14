@@ -17,6 +17,15 @@ function show(value) {
     console.log(value);
 }
 
+//ver 2.4
+
+function count() {
+  var n = 0;
+  return {
+    iteration: function() { return n++ },
+    getValue: function() { console.log(n) }
+  }
+}
 
 //ver.2.1
 // function getObj(obj, check) {
