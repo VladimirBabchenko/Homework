@@ -1,3 +1,156 @@
+// Task 1 - New option exchangingCurrency
+
+const currency = {
+    usd: { uah: 27.90, eur: 0.91, rub: 59.90 },
+    uah: { usd: 0.03, eur: 30.90, rub: 2.5},
+    eur: {usd: 1.1, uah: 31.50, rub: 65.70},
+    rub: {usd: 0.55, uah: 0.40, eur: 0.42}
+};
+
+function checkCurrency(from, to, quantity) {
+    return (from in currency) && (to in currency[from]) && (isFinite(parseInt(quantity)));
+}
+
+function showNotification () {
+    console.log("You are wrong");
+}
+
+function exchange(from, to, quantity) {
+    if (!checkCurrency(from, to, quantity)) return showNotification();
+    return currency[from][to] * quantity;
+}
+
+// Task 2 - Objective with military resources
+
+let militaryObject = [];
+
+function SetCharacteristics(name, currentHealth, maxHealth, availableDist, maxDist) {
+    this.name = name;
+    this.currentHealth = currentHealth;
+    this.maxHealth = maxHealth;
+    this.availableDist = availableDist;
+    this.maxDist = maxDist;
+    return militaryObject.push(this);
+}
+
+SetCharacteristics.prototype.setDist = function(x) {
+    if (!checkDist(x)) return showNotification();
+    this.requiredDist = this.availableDist + x;
+    if (this.requiredDist < 0 || this.requiredDist > this.maxDist) showNotification();
+};
+
+function checkDist(value) {
+    return isFinite(parseInt(value));
+}
+
+SetCharacteristics.prototype.recoverHealth = function () {
+    var result = checkArguments(arguments[0]);
+    return result ?
+        militaryObject[arguments[0]].currentHealth = militaryObject[arguments[0]].maxHealth:
+        militaryObject.forEach(function(iObject) {iObject.currentHealth = iObject.maxHealth});
+};
+
+function checkArguments(x) {
+    var resultForRecovering = false;
+    if (arguments.length === 1 && x >=0 && x <= militaryObject.length) {
+        resultForRecovering = true;
+    }
+    return resultForRecovering;
+}
+
+SetCharacteristics.prototype.restoreEndurance = function() {
+    var result = checkArguments(arguments[0]);
+    return result ?
+        militaryObject[arguments[0]].availableDist = militaryObject[arguments[0]].maxDist:
+        militaryObject.forEach(function(iObject) { iObject.availableDist = iObject.maxDist });
+};
+
+SetCharacteristics.prototype.findDistResources = function(x) {
+    var availableResources = [];
+    militaryObject.filter(filterDist).forEach(addResourcesToArray);
+    if (availableResources.length >0) return availableResources;
+
+    function filterDist(value) {
+        if (value.availableDist >= x) return true;
+        return false;
+    }
+    function addResourcesToArray(value) {availableResources.push(value.name)}
+};
+
+SetCharacteristics.prototype.addNewResources = function(resObj) {
+    if (!Array.isArray(resObj)) return;
+    return militaryObject = militaryObject.concat(resObj);
+};
+
+SetCharacteristics.prototype.getResReadyCombat = function(damage) {
+    return militaryObject.every(checkReady);
+
+    function checkReady(resource) {
+        return resource.currentHealth > damage;
+    }
+};
+
+SetCharacteristics.prototype.changePosition = function (i1, i2) {
+    if (!checkAvailablePosition(i1, i2)) return;
+    this.i1 = i1;
+    this.i2 = i2;
+    var res1 = militaryObject[this.i1];
+    militaryObject[this.i1] = militaryObject[this.i2];
+    militaryObject[this.i2] = res1;
+};
+
+function checkAvailablePosition(pos1, pos2) {
+    var index1 = militaryObject.indexOf(militaryObject[pos1]);
+    var index2 = militaryObject.indexOf(militaryObject[pos2]);
+    return index1 !==-1 && index2 !==-1;
+}
+
+function cloneMilitaryObject(arr) {
+    var target = [];
+    arr.forEach(function (iObject) {
+        var nextObj = {};
+        for (var key in iObject) {
+            if(typeof key === "object") {
+
+                if (iObject.hasOwnProperty(key) && typeof iObject[key] !== "function") {
+                    nextObj[key] = iObject[key];
+                }
+            }
+            nextObj[key] = iObject[key];
+        }
+        target.push(nextObj);
+    });
+    return target;
+}
+function cloneSimple(arr) {
+    var newObj = [];
+    arr.forEach(function (iObject) {
+        newObj.push(Object.assign({}, iObject));
+    });
+    return newObj;
+}
+
+
+// var horse = new SetCharacteristics("horse", 25, 35,25,100);
+// var car = new SetCharacteristics("car", 35, 45, 35, 55);
+// console.log(militaryObject);
+// console.log(militaryObject[0]["name"]);
+// horse.setDist(70);
+// horse.recoverHealth(0);
+// console.log(militaryObject);
+// console.log(horse.findDistResources(30));
+// console.log(horse.addNewResources([{name: "plane", currentHealth: 40, maxHealth: 40, availableDist: 20, maxDist: 4000}]));
+// console.log(horse.getResReadyCombat(120));
+// console.log(horse.changePosition(0,2));
+// console.log(militaryObject);
+// console.log(cloneMilitaryObject(militaryObject));
+// debugger;
+// var newObj = cloneSimple(militaryObject);
+// console.log(newObj)
+
+
+
+
 // Task 2 - increment and getValue; (2 versions)
 
 //ver 2.4
