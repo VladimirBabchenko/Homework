@@ -1,4 +1,3 @@
-
 function MilitaryResources(name, health, distance) {
   this.name = name;
   this.currentHealth = this.maxHealth = health;
@@ -17,18 +16,22 @@ MilitaryResources.prototype.onReadyToFight = function(damage) {
 
 MilitaryResources.prototype.restoreHealth = function() {
   this.currentHealth = this.maxHealth;
+  return this.currentHealth;
+};
+
+MilitaryResources.prototype.clone = function() {
+  return Object.assign(this, {});
 };
 
 function checkArgsForNumber(distance) {
   return isNaN(parseInt(distance));
 }
 
-function checkCorrectArg(arg) {
-  if (arg.length !== 1) return;
-}
 
-var archer = new MilitaryResources("archer", 300, 1500);
-var knight = new MilitaryResources("knight", 500, 900)
-console.log(archer, "\n", knight);
-console.log(archer.onReadyToCross(1000));
-console.log(archer.onReadyToFight(200));
+//
+// var archer = new MilitaryResources("archer", 300, 1500);
+// var knight = new MilitaryResources("knight", 500, 900)
+// console.log(archer, "\n", knight);
+// console.log(archer.onReadyToCross(1000));
+// console.log(archer.onReadyToFight(200));
+// console.log(archer.clone());
