@@ -2,11 +2,18 @@
 // Task 1 - Expand the exchangingCurrency
 
 Number.prototype.toExchange = function () {
-    var from = prompt("Enter currentcy from");
-    var to = prompt("Enter currency to");
+    var arrData = getData();
+    var from = arrData[0];
+    var to = arrData[1];
     var quantity = this.valueOf();
     return exchange(from, to, quantity);
 };
+
+function getData() {
+    var from = prompt("Enter currency from");
+    var to = prompt("Enter currency to");
+    return [from, to]
+}
 
 const currency = {
     usd: { uah: 27.90, eur: 0.91, rub: 59.90 },
@@ -27,8 +34,8 @@ function exchange(from, to, quantity) {
     if (!checkCurrency(from, to, quantity)) return showNotification();
     return currency[from][to] * quantity;
 }
-// var d = 2;
-// console.log(d.toExchange());
+var d = 2;
+console.log(d.toExchange());
 
 
 
