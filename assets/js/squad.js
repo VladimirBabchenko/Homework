@@ -1,33 +1,42 @@
 function Squad (completedResources) {
   this.squad = [];
   if (completedResources) {
-    this.addResourceToSquad(completedResources);
+    this.addResourcesToSquad(completedResources);
   }
 }
 
-Squad.prototype.addResourceToSquad = function(res) {
+Squad.prototype.addResourcesToSquad = function(res) {
+  if (!Array.isArray(res)) return;
   this.squad = this.squad.concat(res);
-  return this.squad;
 };
 
-Squad.prototype.isSquadReadyToMove = function(dist){
-  return this.squad.every(function (iObject) { return iObject.availableDist >= dist; })
+Squad.prototype.isResourcesReadyToMove = function(dist, ind) {
+  return checkExistingIndex(ind) ? this.squad[ind].isReadyToCross(dist) :
+  this.squad.every(function (resources) { return resources.availableDist >= dist; })
 };
 
-Squad.prototype.isSquadReadyToFight = function (damage) {
-    return this.squad.every(function (iObject) { return iObject.currentHealth > damage; })
+Squad.prototype.isResourcesReadyToFight = function (damage, ind) {
+  return checkExistingIndex(ind) ? this.squad[ind].isReadyToFight(damage) :
+      this.squad.every(function(resources) { return resources.currentHealth > damage })
 };
 
-Squad.prototype.restoreSquadHP = function() {
-  return this.squad.forEach(function(iObject) { return iObject.currentHealth = iObject.maxHealth;})
+Squad.prototype.restoreSquad = function() {
+  this.squad.forEach(function(resource) { resource.restore() })
 };
 
-Squad.prototype.restoreSquadEndurance = function() {
-  return this.squad.forEach(function(iObject) { return iObject.availableDist = iObject.maxDist; })
+Squad.prototype.getResourcesReadyToMove = function(dist) {
+  return this.squad.filter(function(resource) {
+    return resource.availableDist >= dist;
+  })
+};
+
+Squad.prototype.getResourcesReadyToFight = function(damage) {
+  return this.squad.filter(function(resource) {
+    return resource.currentHealth > damage;
+  })
 };
 
 Squad.prototype.replaceSquadUnits = function(pos1, pos2) {
-
   if (!checkAvailablePos.call(this, pos1, pos2)) return;
   this.positionUnit1 = pos1;
   this.positionUnit2 = pos2;
@@ -36,26 +45,36 @@ Squad.prototype.replaceSquadUnits = function(pos1, pos2) {
   this.squad[this.positionUnit2] = unit2;
 };
 
-Squad.prototype.cloneSquad = function() {
-  return Object.assign(this, {});
+Squad.prototype.cloneResources = function(ind) {
+  return checkExistingIndex(ind) ? this.squad[ind].clone():
+      new Squad(this.squad);
 };
 
 function checkAvailablePos(pos1, pos2) {
   return pos1 <= this.squad.length && pos2 <= this.squad.length&& pos1 >=0 && pos2 >=0
 }
 
-// var newSquad = new Squad([archer, knight]);
-//
-// console.log(newSquad.squad[0], newSquad.squad[1]);
-// console.log(newSquad);
-// console.log(newSquad.isSquadReadyToMove(900));
-// console.log(newSquad.isSquadReadyToFight(200));
-// console.log(newSquad.restoreSquadHP());
-// console.log(newSquad);
-// console.log(newSquad.restoreSquadEndurance());
-// console.log(newSquad.cloneSquad());
-// debugger;
-// console.log(newSquad.replaceSquadUnits(0, 1));
+function checkExistingIndex(index) {
+    return index >= 0;
+}
+
+var squad = new Squad([new MilitaryResource("assasin,", 300, 450, 1200)]);
+var enemySquad = new Squad([new MilitaryResource("paladin", 150, 900, 1400), archer, knight]);
+console.log(squad.addResourcesToSquad([archer, knight]));
+console.log(squad);
+console.log(enemySquad);
+// console.log(squad.isResourcesReadyToMove(400,2));
+// console.log(squad.isResourcesReadyToFight(349));
+// squad.squad[0].currentHealth = 10;
+// console.log(squad);
+// squad.restoreSquad();
+// console.log(squad);
+// console.log(squad.getResourcesReadyToMove(500));
+// console.log(squad.getResourcesReadyToFight(500));
+// console.log(squad.cloneResources());
+// console.log(squad.cloneResources(1));
+// console.log(squad);
+
 
 
 
