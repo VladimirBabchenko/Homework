@@ -15,28 +15,28 @@ function chooseProductToPlant() {
     return plants[res];
 }
 
-console.log(chooseProductToPlant())
+console.log(chooseProductToPlant());
 
 console.log(chooseResource(chooseFarmForCrop(farm1, farm2)));
 
-setTimeout(function callback() {
-    try {
-        var farm = chooseFarmForCrop(farm1, farm2);
-        if(farm.farm.length === 0) return;
-        var chosenResource = chooseResource(farm);
-        var resultOfPlanting = farm.farm[chosenResource].isReadyForPlanting();
-        if (farm.farm[chosenResource].product) {
-            farm.farm[chosenResource].harvest();
-        } else if (farm.farm[chosenResource].isReadyForPlanting()) {
-            farm.farm[chosenResource].plant(chooseProductToPlant().name, chooseProductToPlant().income);
-        } else {
-            farm.farm.splice(chosenResource, 1);
-            throw new Error("The field is needed to restore before planting");
-        }
-        console.log(farm.farm[chosenResource]);
-    } catch (e) {
-        console.log(e.name, e.message);
-    } finally {
-        setTimeout(callback, 1000);
-    }
-}, 1000);
+// setTimeout(function callback() {
+//     try {
+//         var farm = chooseFarmForCrop(farm1, farm2);
+//         if(farm.farm.length === 0) return;
+//         var chosenResource = chooseResource(farm);
+//         var resultOfPlanting = farm.farm[chosenResource].isReadyForPlanting();
+//         if (farm.farm[chosenResource].product) {
+//             farm.farm[chosenResource].harvest();
+//         } else if (farm.farm[chosenResource].isReadyForPlanting()) {
+//             farm.farm[chosenResource].plant(chooseProductToPlant().name, chooseProductToPlant().income);
+//         } else {
+//             farm.farm.splice(chosenResource, 1);
+//             throw new Error("The field is needed to restore before planting");
+//         }
+//         console.log(farm.farm[chosenResource]);
+//     } catch (e) {
+//         console.log(e.name, e.message);
+//     } finally {
+//         setTimeout(callback, 1000);
+//     }
+// }, 1000);

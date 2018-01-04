@@ -14,6 +14,16 @@ Resource.prototype.harvest = function() {
     this.product = null;
     this.income = null;
     this.durability += 0.25;
+    this.addToDom();
+};
+
+Resource.prototype.addToDom = function () {
+    this.resource = document.createElement("div");
+    this.resource.cssText = "width: 150px; height: 100px; background-color: rgba(100, 100, 100," +
+        " 0.8);";
+    var wrapper = document.getElementsByClassName("wrapper-farm")[0];
+    var self = this;
+    wrapper.appendChild(self.resource);
 };
 
 Resource.prototype.restore = function() {

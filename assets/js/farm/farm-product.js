@@ -5,3 +5,4 @@ function Product(type, quantity, price) {
     this.price = price;
 }
 
+
