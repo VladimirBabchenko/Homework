@@ -1,14 +1,14 @@
-function Squad (completedResources) {
+function Squad (completedResources, teamColor) {
   this.squad = [];
   if (completedResources) {
     this.addResourcesToSquad(completedResources);
   }
+  this.addToDomSquad(teamColor);
 }
 
 Squad.prototype.addResourcesToSquad = function(res) {
   if (!Array.isArray(res)) return;
   this.squad = this.squad.concat(res);
-  this.addToDom();
 };
 
 Squad.prototype.isResourcesReadyToMove = function(dist, ind) {
@@ -51,16 +51,22 @@ Squad.prototype.cloneResources = function(ind) {
       new Squad(this.squad);
 };
 
-Squad.prototype.addToDom = function() {
-  var newAddToDom = MilitaryResource.prototype.addToDom;
-  this.squad.forEach(function(res) {
-    newAddToDom.apply(res);
-  })
+Squad.prototype.addToDomSquad = function(teamColor) {
+  this.teamBlock = document.createElement("div");
+  var self = this;
+
+  this.teamBlock.classList.add("team-block");
+  this.teamBlock.style.backgroundColor = teamColor;
+
+  this.squad.forEach(function(resource) {
+    self.teamBlock.appendChild(resource.warrior);
+  });
 };
 
 
-// var squad = new Squad([new MilitaryResource("assasin", 300, 450, 1200), archer, knight]);
-// var enemySquad = new Squad([new MilitaryResource("paladin", 150, 900, 1400), archer, knight]);
+//
+var battleTeam1 = new Squad([assasin, lich, vampire], "grey");
+var battleTeam2 = new Squad([paladin, archer, knight], "gold");
 // console.log(squad);
 // console.log(enemySquad);
 // console.log(squad.isResourcesReadyToMove(400,2));

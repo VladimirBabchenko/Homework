@@ -1,17 +1,79 @@
-function BattleGround(squad) {
+function BattleGround(squad, land) {
     this.battleField = [];
-    this.battleField.push(squad);
+    if (squad) {
+        this.addToBattleGround(squad);
+    }
+    this.addToDomField(land);
 }
 
 BattleGround.prototype = Object.create(Squad.prototype);
 BattleGround.prototype.constructor = BattleGround;
 
 
-BattleGround.prototype.attacked = function(team2) {
+BattleGround.prototype.addToDomField = function(field) {
     var self = this;
-    var team = this.defineWhichTeamAttack(self, team2);
-    var attackingTeam = team["attacking"].battleField[0];
-    var defendingTeam = team["defending"].battleField[0];
+    var wrapper = document.getElementById("wrapper-military");
+    wrapper.style.background = field;
+
+
+    var teamsBlock = document.createElement("section");
+    var fieldScoreWrapper = document.createElement("section");
+    var fieldBattle = document.createElement("div");
+    var scoreBoard = document.createElement("div");
+
+    this.battleField.forEach(function(team) {
+        var squadBlockWrapper = document.createElement("div");
+        var squadBlock = document.createElement("ul");
+        team["squadLength"] = document.createElement("span");
+
+        team["squadLength"].innerHTML = team.squad.length;
+
+        squadBlockWrapper.classList.add("score-team-wrapper");
+        squadBlock.classList.add("score-board-team");
+        team["squadLength"].classList.add("team-score");
+
+        team.squad.forEach(function(resource) {
+            var res = document.createElement("li");
+            resource["scoreTitle"] = res;
+            res.classList.add("score-board-warrior");
+            res.innerHTML = resource.name;
+            squadBlock.appendChild(res);
+        });
+
+        squadBlockWrapper.append(team["squadLength"], squadBlock);
+        scoreBoard.appendChild(squadBlockWrapper);
+    });
+
+    for (var i = 0; i < 172*28; i += 172) {
+        var fieldCell = document.createElement("div");
+        fieldCell.classList.add("field-cell");
+        fieldBattle.appendChild(fieldCell);
+    }
+
+    teamsBlock.classList.add("teamlist-block");
+    fieldScoreWrapper.classList.add("field-wrapper");
+    fieldBattle.classList.add("field");
+    scoreBoard.classList.add("score-board");
+
+    this.battleField.forEach(function(squad) {
+        teamsBlock.appendChild(squad.teamBlock);
+    });
+
+    wrapper.append(teamsBlock, fieldScoreWrapper);
+    fieldScoreWrapper.append(fieldBattle, scoreBoard);
+};
+
+BattleGround.prototype.addToBattleGround = function(squad) {
+    if (!Array.isArray(squad)) return;
+    this.battleField = this.battleField.concat(squad);
+};
+
+
+BattleGround.prototype.attacked = function() {
+    var self = this;
+    var team = this.defineWhichTeamAttack(self.battleField[0], self.battleField[1]);
+    var attackingTeam = team["attacking"].squad;
+    var defendingTeam = team["defending"].squad;
     if(attackingTeam.length === 0 || defendingTeam.length === 0) return;
     var attackingInd = this.defineWarriorIndex(attackingTeam.length);
     var defendingInd = this.defineWarriorIndex(defendingTeam.length);
@@ -19,11 +81,13 @@ BattleGround.prototype.attacked = function(team2) {
     var defendingWarrior = defendingTeam[defendingInd];
     defendingWarrior.attackedBy(attackingWarrior);
     if(defendingWarrior.currentHealth <= 0) {
+        defendingWarrior.warrior.parentNode.removeChild(defendingWarrior.warrior);
         defendingTeam.splice(defendingInd, 1);
+        team["defending"].squadLength.innerHTML = defendingTeam.length;
+        defendingWarrior.scoreTitle.insertAdjacentHTML("beforeEnd", " - was killed")
         throw new Error (showKilling(defendingWarrior));
     }
     this.showResults(attackingWarrior, defendingWarrior);
-
 };
 
 BattleGround.prototype.showResults = function(attacker, defender) {
@@ -54,51 +118,12 @@ BattleGround.prototype.defineWhichTeamAttack = function(team1, team2) {
                           {attacking: team2, defending: team1};
 };
 
-var battleTeam1 = new BattleGround([new MilitaryResource("assasin", 300, 450, 1200), lich, vampire]);
-var battleTeam2 = new BattleGround([new MilitaryResource("paladin", 150, 900, 1400), archer, knight]);
-console.log(battleTeam1, battleTeam2);
 
-// battleTeam1.fight(battleTeam2);
+var battleTeams = new BattleGround([battleTeam1, battleTeam2], "url(assets/img/landscape.jpg)");
+console.log(battleTeams);
 
-// function defineWhichSquadAttack(squad, enemy) {
-//     var chance = Math.round(Math.random()*100);
-//     return chance < 50 ? {attackingSquad: squad, defendingSquad: enemy} :
-//                          {attackingSquad: enemy, defendingSquad: squad};
-// }
-//
-// function whichResourcesFight(squadLength) {
-//     return Math.round(Math.random() * (squadLength-1));
-// }
-// function getFightingInterval() {
-//     return Math.round(Math.random() *1000);
-// }
+battleTeams.fight();
 
-// setTimeout(function callback() {
-//     try {
-//         var fightingSquads = defineWhichSquadAttack(squad, enemySquad);
-//         var attackingSquad = fightingSquads.attackingSquad.squad;
-//         var defendingSquad = fightingSquads.defendingSquad.squad;
-//         var attackingResource = whichResourcesFight(attackingSquad.length);
-//         var defendingResource = whichResourcesFight(defendingSquad.length);
-//         if (defendingSquad.length === 0 || attackingSquad.length === 0) return;
-//         defendingSquad[defendingResource].attackedBy(attackingSquad[attackingResource]);
-//         showInfo(defendingSquad, defendingResource, attackingSquad, attackingResource);
-//         if (defendingSquad[defendingResource].currentHealth < 0) {
-//             defendingSquad.splice(defendingResource, 1);
-//             throw new Error( defendingSquad[defendingResource].name + " was" +
-//                 " killed");
-//         }
-//     } catch (e) {
-//         console.log(e.name, e.message);
-//     } finally {
-//         setTimeout(callback, getFightingInterval());
-//     }
-// }, 1000);
-//
-// function showInfo (defSquad, indDef, attSquad, indAtt) {
-//     console.log(defSquad.forEach(function (res) {console.log(res.name, res.currentHealth)}) + "\n" + defSquad[indDef].name + ": currentHealth" +
-//         " = " + defSquad[indDef].currentHealth + " receivedDamage: " + attSquad[indAtt].damage + " from " + attSquad[indAtt].name);
-// }
 
 
 

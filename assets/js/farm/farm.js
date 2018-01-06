@@ -9,15 +9,15 @@ Farm.prototype.combineResources = function(res) {
     this.farm = this.farm.concat(res);
 };
 
-Farm.prototype.harvestAll = function(ind) {
-    var thisFarm = this;
-    return checkIndex(ind, thisFarm) ? this.farm[ind].harvest() :
-        this.farm.forEach(function(field) {
-            field.harvest();
-            Resource.prototype.addToDom.apply(field);
-        })
-
-};
+// Farm.prototype.harvestAll = function(ind) {
+//     var thisFarm = this;
+//     return checkIndex(ind, thisFarm) ? this.farm[ind].harvest() :
+//         this.farm.forEach(function(field) {
+//             field.harvest();
+//             // Resource.prototype.addToDom.apply(field);
+//         })
+//
+// };
 
 // Farm.prototype.harvest = function() {
 //     return this.farm.filter(function(res) {
@@ -42,9 +42,9 @@ Farm.prototype.sellProducts = function() {
 var farm1 = new Farm([field1, field2]);
 var farm2 = new Farm([new Resource("field3", "orange", 2200, 0.5)]);
 console.log(farm1, "\n", farm2);
-farm1.harvestAll(0);
+// farm1.harvestAll(0);
 // console.log(farm1);
-console.log(farm2.harvestAll());
+// console.log(farm2.harvestAll());
 // console.log(farm2);
 farm1.getResource(2);
 console.log(farm1);
