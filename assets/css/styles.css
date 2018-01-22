@@ -175,7 +175,7 @@ ul {
 }
 
 #events-list-calendar {
-  flex-basis: 500px;
+  flex-basis: 600px;
   flex-wrap: wrap;
 }
 
@@ -194,13 +194,23 @@ ul {
   font-size: 20px;
 }
 
+.event-num,
+.event-name,
+.event-remain-time,
 .event-started,
 .event-future,
 .event-ended {
-  flex-basis: 100px;
+  background-color: aquamarine;
+}
+
+.event-started,
+.event-future,
+.event-ended {
+  flex-basis: 150px;
 }
 
 .event-item-calendar .event-num {
+  flex-basis: 25px;
   padding: 0 10px;
 }
 
@@ -218,6 +228,7 @@ body {
   width: 20%;
   border: 1px solid black;
   margin: 20px auto;
+  background-color: azure;
 }
 
 #event-name-textarea,

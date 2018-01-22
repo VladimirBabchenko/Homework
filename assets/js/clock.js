@@ -46,6 +46,10 @@ var Clock = (function () {
     Clock.prototype.stop = function () {
         clearInterval(this.timerId);
     };
+
+    Clock.prototype.addPanelTemplate = function() {
+        new Panel;
+    };
     return Clock;
 }());
 
@@ -59,5 +63,6 @@ var Pattern = (function(){
     return Pattern;
 }());
 
-var clock = new Clock;
-clock.start();
+// var clock = new Clock;
+// clock.start();
+// clock.addPanelTemplate();
