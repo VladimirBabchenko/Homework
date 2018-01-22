@@ -3,6 +3,11 @@ html, body {
   margin: 0;
 }
 
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
 ul {
   padding: 0;
 }
@@ -131,3 +136,110 @@ ul {
   color: red;
 }
 
+.wrapper-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#events-list {
+  flex-basis: 500px;
+}
+
+.event-item {
+  display: flex;
+  align-items: stretch;
+  font-size: 20px;
+  text-align: center;
+}
+
+.event-item div {
+  border: 1px solid black;
+  padding: 0 10px;
+}
+
+.event-name {
+  flex-basis: 150px;
+  padding: 0 10px;
+}
+
+.event-remain-time {
+  flex-basis: 200px;
+}
+
+.event-item .event-num {
+  flex-basis: 25px;
+
+  margin-left: 20px;
+  padding: 0 5px;
+}
+
+#events-list-calendar {
+  flex-basis: 500px;
+  flex-wrap: wrap;
+}
+
+.event-item-calendar {
+  display: flex;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.event-item-calendar div {
+  border: 1px solid black;
+}
+
+#events:first-child {
+  font-size: 20px;
+}
+
+.event-started,
+.event-future,
+.event-ended {
+  flex-basis: 100px;
+}
+
+.event-item-calendar .event-num {
+  padding: 0 10px;
+}
+
+#add-event {
+  margin-top: 40px;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+body {
+  text-align: center;
+}
+
+.template-add-events {
+  width: 20%;
+  border: 1px solid black;
+  margin: 20px auto;
+}
+
+#event-name-textarea,
+#event-date-textarea {
+  padding: 5px;
+  height: 30px;
+  background-color: lightgray;
+}
+
+h4 {
+  margin: 10px 0;
+}
+
+#event-ok {
+  margin-top: 10px;
+}
+
+.template-add-events {
+  display: none;
+  padding: 20px;
+}
+
+.panel {
+  display: none;
+}

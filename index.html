@@ -16,6 +16,37 @@
 
 </div>
 <div id="clock"></div>
+<section class="panel">
+<div class="wrapper-panel">
+
+  <div id="events-list">
+    <div class="event-item">
+      <div class="event-num">№</div>
+      <div class="event-name">Event-name</div>
+      <div class="event-remain-time">Remaining-time</div>
+    </div>
+  </div>
+
+  <div id="events-list-calendar">
+    <div class="event-item-calendar">
+      <div class="event-num">№</div>
+      <div class="event-name">Event-name</div>
+      <div class="event-started">Started</div>
+      <div class="event-future">Future</div>
+      <div class="event-ended">Ended</div>
+    </div>
+  </div>
+</div>
+<button id="add-event">Add new Event</button>
+<div class="template-add-events">
+  <h4>Add Event</h4>
+  <div id="event-name-textarea" contenteditable="true" tabindex="0"></div>
+  <h4>Enter Date</h4>
+  <div id="event-date-textarea" contenteditable="true" tabindex="1">year, month, day, hour, min  </div>
+  <button id="event-ok">OK</button>
+  <button id="event-cancel">Cancel</button>
+</section>
+</div>
 <script src="assets/js/helpers.js"></script>
 <script src="assets/js/clock.js"></script>
 <script src="assets/js/panel.js"></script>

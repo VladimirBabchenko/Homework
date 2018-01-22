@@ -60,5 +60,4 @@ var Pattern = (function(){
 }());
 
 var clock = new Clock;
-console.log(clock.start());
-
+clock.start();
