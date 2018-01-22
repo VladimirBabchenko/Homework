@@ -25,7 +25,7 @@ var Clock = (function () {
             document.body.style.cssText = pattern.afternoon;
         }
         if (time["hours"] > 19 && time["hours"] <= 24) {
-            document.body.style.cssText = pattern.night;
+            document.body.style.cssText = pattern.evening;
         }
     };
 
@@ -59,6 +59,6 @@ var Pattern = (function(){
     return Pattern;
 }());
 
-// var clock = new Clock;
-// console.log(clock.start());
+var clock = new Clock;
+console.log(clock.start());
 
