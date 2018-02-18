@@ -32,7 +32,7 @@ var Clock = (function () {
     Clock.prototype.render = function () {
         var wrapper = document.getElementById("clock");
         var timer = this.construct();
-        this.setBackground(new Pattern);
+        this.setBackground(pattern);
         for (var key in timer) {
             timer[key] = "<span>" + timer[key] + "</span>";
         }
@@ -49,15 +49,12 @@ var Clock = (function () {
     return Clock;
 }());
 
-var Pattern = (function(){
-    function Pattern() {
-        this.morning = "background: url(assets/img/morning.jpg); background-size: cover;";
-        this.afternoon = "background: url(assets/img/afternoon.jpg); background-size: cover;";
-        this.evening = "background: url(assets/img/evening.jpg); background-size: cover;";
-        this.night = "background: url(assets/img/night.jpeg); background-size: cover;";
-    }
-    return Pattern;
-}());
+var pattern =  {
+    morning: "background: url(assets/img/morning.jpg); background-size: cover;",
+    afternoon: "background: url(assets/img/afternoon.jpg); background-size: cover;",
+    evening: "background: url(assets/img/evening.jpg); background-size: cover;",
+    night: "background: url(assets/img/night.jpeg); background-size: cover;"
+};
 
 var clock = new Clock;
 console.log(clock.start());
