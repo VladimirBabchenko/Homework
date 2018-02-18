@@ -1,0 +1,34 @@
+{
+  "name": "webproj",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "prod": "set NODE_ENV=production&& npm run build",
+    "dev": "set NODE_ENV=development&& npm run build",
+    "start": "npm i && npm run serve",
+    "build": "npm run webpack",
+    "serve": "node tasks/webpack-server",
+    "webpack": "node tasks/webpack"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "handlebars": "^4.0.11",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
+    "uglifyjs-webpack-plugin": "^1.2.0",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1",
+    "webpack-merge": "^4.1.1"
+  }
+}

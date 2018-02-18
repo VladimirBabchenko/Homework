@@ -1,5 +1,6 @@
-var Clock = (function () {
-    function Clock() {
+module.exports = (function () {
+    function Clock(pattern) {
+        this.pattern = pattern;
     }
 
     Clock.prototype.construct = function () {
@@ -32,7 +33,7 @@ var Clock = (function () {
     Clock.prototype.render = function () {
         var wrapper = document.getElementById("clock");
         var timer = this.construct();
-        this.setBackground(pattern);
+        this.setBackground(this.pattern);
         for (var key in timer) {
             timer[key] = "<span>" + timer[key] + "</span>";
         }
@@ -48,14 +49,3 @@ var Clock = (function () {
     };
     return Clock;
 }());
-
-var pattern =  {
-    morning: "background: url(assets/img/morning.jpg); background-size: cover;",
-    afternoon: "background: url(assets/img/afternoon.jpg); background-size: cover;",
-    evening: "background: url(assets/img/evening.jpg); background-size: cover;",
-    night: "background: url(assets/img/night.jpeg); background-size: cover;"
-};
-
-var clock = new Clock;
-console.log(clock.start());
-
