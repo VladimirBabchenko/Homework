@@ -1,3 +1,5 @@
+var root = require("../../../helpers/root");
+
 export default function MilitaryResource(name, damage, health, distance, url) {
   this.name = name;
   this.damage = damage;
@@ -44,12 +46,14 @@ MilitaryResource.prototype.addToDomRes = function(url) {
   this.warrior.appendChild(this.warriorBody);
 };
 
-// var paladin = new MilitaryResource("paladin", 150, 800, 1500, "assets/img/paladin.png");
-// var assasin = new MilitaryResource("assasin", 300, 450, 1200, "assets/img/assasin.png");
-// var archer = new MilitaryResource("archer", 50, 350, 400, "assets/img/archer.png");
-// var knight = new MilitaryResource("knight", 120, 550, 1200, "assets/img/knight.png");
-// var lich = new MilitaryResource("lich", 200, 300, 450, "assets/img/lich.png");
-// var vampire = new MilitaryResource("vampire", 150, 550, 1500, "assets/img/vampire.png");
+// var paladin = new MilitaryResource("paladin", 150, 800, 1500, "/src/img/paladin.png");
+// var assasin = new MilitaryResource("assasin", 300, 450, 1200, "/src/img/assasin.png");
+// var archer = new MilitaryResource("archer", 50, 350, 400, "/src/img/archer.png");
+// var knight = new MilitaryResource("knight", 120, 550, 1200, "/src/img/knight.png");
+// var lich = new MilitaryResource("lich", 200, 300, 450, "/src/img/lich.png");
+// var vampire = new MilitaryResource("vampire", 150, 550, 1500, "/src/img/vampire.png");
+// export {paladin, assasin, archer, knight, lich, vampire};
+
 // console.log(archer, "\n", knight);
 // console.log(archer.isReadyToCross("dsf"));
 // console.log(knight.isReadyToFight(600));

@@ -29,3 +29,5 @@ function getFightingInterval() {
 function showKilling(warrior) {
     return warrior.name + " was killed";
 }
+
+export { checkArgsForNumber, checkAvailablePos, checkExistingIndex, checkIndex, showRes, randomColor, getFightingInterval, showKilling}

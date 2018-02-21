@@ -6,8 +6,17 @@ module.exports = [
   {test: /\.scss$/,
     use: ExtractTextPlugin.extract({
       fallback: "style-loader",
-      use: ["css-loader", "sass-loader"]
+        use: [{
+            loader: "css-loader", options: {
+                sourceMap: true
+            }
+        }, {
+            loader: "sass-loader", options: {
+                sourceMap: true
+            }
+        }]
     })
   },
-  { test:/\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: "file?name=assets/[name].[hash].[ext]" }
+  // { test:/\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: "file?name=assets/[name].[hash].[ext]" }
+  { test:/\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: "file-loader?name=/assets/[name].[hash].[ext]" }
 ];

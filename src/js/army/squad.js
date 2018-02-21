@@ -1,4 +1,4 @@
-function Squad (completedResources, teamColor) {
+export default function Squad (completedResources, teamColor) {
   this.squad = [];
   if (completedResources) {
     this.addResourcesToSquad(completedResources);
@@ -64,9 +64,9 @@ Squad.prototype.addToDomSquad = function(teamColor) {
 };
 
 
-//
-var battleTeam1 = new Squad([assasin, lich, vampire], "grey");
-var battleTeam2 = new Squad([paladin, archer, knight], "gold");
+// import {paladin, assasin, archer, knight, lich, vampire} from "./military-resource";
+// var battleTeam1 = new Squad([assasin, lich, vampire], "grey");
+// var battleTeam2 = new Squad([paladin, archer, knight], "gold");
 // console.log(squad);
 // console.log(enemySquad);
 // console.log(squad.isResourcesReadyToMove(400,2));

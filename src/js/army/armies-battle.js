@@ -1,19 +1,22 @@
-function BattleGround(squad, land) {
+import Squad from "./squad";
+import { getFightingInterval, showKilling } from "../helpers";
+
+export default function BattleGround(squad, landscape) {
     this.battleField = [];
     if (squad) {
         this.addToBattleGround(squad);
     }
-    this.addToDomField(land);
+    this.addToDomField(landscape);
 }
 
 BattleGround.prototype = Object.create(Squad.prototype);
 BattleGround.prototype.constructor = BattleGround;
 
 
-BattleGround.prototype.addToDomField = function(field) {
+BattleGround.prototype.addToDomField = function(landscape) {
     var self = this;
     var wrapper = document.getElementById("wrapper-military");
-    wrapper.style.background = field;
+    wrapper.style.background = landscape;
 
 
     var teamsBlock = document.createElement("section");
@@ -119,10 +122,10 @@ BattleGround.prototype.defineWhichTeamAttack = function(team1, team2) {
 };
 
 
-var battleTeams = new BattleGround([battleTeam1, battleTeam2], "url(assets/img/landscape.jpg)");
-console.log(battleTeams);
-
-battleTeams.fight();
+// var battleTeams = new BattleGround([battleTeam1, battleTeam2], "url(assets/img/landscape.jpg)");
+// console.log(battleTeams);
+//
+// battleTeams.fight();
 
 
 
