@@ -1,67 +1,121 @@
-export default function Squad (completedResources, teamColor) {
-  this.squad = [];
-  if (completedResources) {
-    this.addResourcesToSquad(completedResources);
+import { isItMilitaryResource, checkExistingIndex, checkAvailablePos } from "../helpers";
+import * as helpers from "../helpers";
+
+// export default function Squad (completedResources, teamColor) {
+//   this.squad = [];
+//   if (completedResources) {
+//     this.addResourcesToSquad(completedResources);
+//   }
+//   this.addToDomSquad(teamColor);
+// }
+
+export default class Squad {
+  constructor(completedResources, teamColor) {
+    this.squad = [];
+    if (completedResources) this.addResourcesToSquad(completedResources);
+    this.addToDomSquad(teamColor);
   }
-  this.addToDomSquad(teamColor);
+
+  addResourcesToSquad(res) {
+    if (!Array.isArray(res) && !helpers.isItMilitaryResource(res)) return;
+      this.squad = this.squad.concat(res);
+  };
+
+  isResourcesReadyToMove(dist, ind) {
+    return helpers.checkExistingIndex(ind) ? this.squad[ind].isReadyToCross(dist) :
+    this.squad.every(resources => resources.availableDist >= dist)
+  };
+
+  isResourcesReadyToFight(damage, ind) {
+    return helpers.checkExistingIndex(ind) ? this.squad[ind].isReadyToFight(damage) :
+        this.squad.every(resources => resources.currentHealth > damage )
+  };
+
+  restoreSquad() {
+    this.squad.forEach(resource => resource.restore())
+  };
+
+  getResourcesReadyToMove(dist) {
+    return this.squad.filter(resource => resource.availableDist >= dist)
+  };
+
+  getResourcesReadyToFight(damage) {
+    return this.squad.filter(resource => resource.currentHealth > damage)
+  };
+
+  replaceSquadUnits(pos1, pos2) {
+    if (!helpers.checkAvailablePos.call(this, pos1, pos2)) return;
+      var unit1 = this.squad[pos1], unit2 = this.squad[pos2];
+      this.squad[pos1] = unit2;
+      this.squad[pos2] = unit1;
+  };
+
+  cloneResources(ind) {
+    return helpers.checkExistingIndex(ind) ? this.squad[ind].clone():
+        new Squad(this.squad);
+  };
+
+  addToDomSquad(teamColor) {
+    this.teamBlock = document.createElement("div");
+  
+    this.teamBlock.classList.add("team-block");
+    this.teamBlock.style.backgroundColor = teamColor;
+  
+    this.squad.forEach(resource => this.teamBlock.appendChild(resource.warrior));
+  };
 }
 
-Squad.prototype.addResourcesToSquad = function(res) {
-  if (!Array.isArray(res)) return;
-  this.squad = this.squad.concat(res);
-};
+// Squad.prototype.addResourcesToSquad = function(res) {
+//   if (!Array.isArray(res) && !helpers.isItMilitaryResource(res)) return;
+//     this.squad = this.squad.concat(res);
+// };
 
-Squad.prototype.isResourcesReadyToMove = function(dist, ind) {
-  return checkExistingIndex(ind) ? this.squad[ind].isReadyToCross(dist) :
-  this.squad.every(function (resources) { return resources.availableDist >= dist; })
-};
+// Squad.prototype.isResourcesReadyToMove = function(dist, ind) {
+//   return helpers.checkExistingIndex(ind) ? this.squad[ind].isReadyToCross(dist) :
+//   this.squad.every(function (resources) { return resources.availableDist >= dist; })
+// };
 
-Squad.prototype.isResourcesReadyToFight = function (damage, ind) {
-  return checkExistingIndex(ind) ? this.squad[ind].isReadyToFight(damage) :
-      this.squad.every(function(resources) { return resources.currentHealth > damage })
-};
+// Squad.prototype.isResourcesReadyToFight = function (damage, ind) {
+//   return helpers.checkExistingIndex(ind) ? this.squad[ind].isReadyToFight(damage) :
+//       this.squad.every(function(resources) { return resources.currentHealth > damage })
+// };
 
-Squad.prototype.restoreSquad = function() {
-  this.squad.forEach(function(resource) { resource.restore() })
-};
+// Squad.prototype.restoreSquad = function() {
+//   this.squad.forEach(function(resource) { resource.restore() })
+// };
 
-Squad.prototype.getResourcesReadyToMove = function(dist) {
-  return this.squad.filter(function(resource) {
-    return resource.availableDist >= dist;
-  })
-};
+// Squad.prototype.getResourcesReadyToMove = function(dist) {
+//   return this.squad.filter(function(resource) {
+//     return resource.availableDist >= dist;
+//   })
+// };
 
-Squad.prototype.getResourcesReadyToFight = function(damage) {
-  return this.squad.filter(function(resource) {
-    return resource.currentHealth > damage;
-  })
-};
+// Squad.prototype.getResourcesReadyToFight = function(damage) {
+//   return this.squad.filter(function(resource) {
+//     return resource.currentHealth > damage;
+//   })
+// };
 
-Squad.prototype.replaceSquadUnits = function(pos1, pos2) {
-  if (!checkAvailablePos.call(this, pos1, pos2)) return;
-  this.positionUnit1 = pos1;
-  this.positionUnit2 = pos2;
-  var unit2 = this.squad[this.positionUnit1];
-  this.squad[this.positionUnit1] = this.squad[this.positionUnit2];
-  this.squad[this.positionUnit2] = unit2;
-};
+// Squad.prototype.replaceSquadUnits = function(pos1, pos2) {
+//   if (!helpers.checkAvailablePos.call(this, pos1, pos2)) return;
+//     var unit1 = this.squad[pos1], unit2 = this.squad[pos2];
+//     this.squad[pos1] = unit2;
+//     this.squad[pos2] = unit1;
+// };
 
-Squad.prototype.cloneResources = function(ind) {
-  return checkExistingIndex(ind) ? this.squad[ind].clone():
-      new Squad(this.squad);
-};
+// Squad.prototype.cloneResources = function(ind) {
+//   return helpers.checkExistingIndex(ind) ? this.squad[ind].clone():
+//       new Squad(this.squad);
+// };
 
-Squad.prototype.addToDomSquad = function(teamColor) {
-  this.teamBlock = document.createElement("div");
-  var self = this;
+// Squad.prototype.addToDomSquad = function(teamColor) {
+//   this.teamBlock = document.createElement("div");
 
-  this.teamBlock.classList.add("team-block");
-  this.teamBlock.style.backgroundColor = teamColor;
+//   this.teamBlock.classList.add("team-block");
+//   this.teamBlock.style.backgroundColor = teamColor;
 
-  this.squad.forEach(function(resource) {
-    self.teamBlock.appendChild(resource.warrior);
-  });
-};
+//   this.squad.forEach(resource => this.teamBlock.appendChild(resource.warrior));
+// };
 
 
 // import {paladin, assasin, archer, knight, lich, vampire} from "./military-resource";

@@ -13,6 +13,12 @@ module.exports = merge(webpackConfig, {
     filename: '[name].bundle.js'
   },
 
+  devtool: "inline-cheap-module-source-map",
+
+  watchOptions: {
+    aggregateTimeout: 100
+  },
+
   devServer: {
     contentBase: config.src,
     colors: true,

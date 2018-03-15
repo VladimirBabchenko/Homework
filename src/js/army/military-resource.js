@@ -1,54 +1,66 @@
+<<<<<<< HEAD
 var root = require("../../../helpers/root");
 // import checkArgsForNumber from "../helpers.js";
 // var helpers = require("../helpers");
 import {checkArgsForNumber} from "../helpers";
+=======
+import * as helpers from "../helpers";
+>>>>>>> 268f9b87abe8246c5517d47b129c1b3ef7175300
 
-export default function MilitaryResource(name, damage, health, distance, url) {
-  this.name = name;
-  this.damage = damage;
-  this.currentHealth = this.maxHealth = health;
-  this.availableDist = this.maxDist = distance;
-  this.addToDomRes(url);
-}
+export default class MilitaryResource {
+  constructor(name, damage, health, distance, url) {
+    this.name = name;
+    this.damage = damage;
+    this.currentHealth = this.maxHealth = health;
+    this.availableDist = this.maxDist = distance
+    this.addToDomRes(url);
+  }
 
-MilitaryResource.prototype.isReadyToCross = function(dist) {
-  if (checkArgsForNumber(dist)) return;
-  return this.availableDist - dist >= 0;
-};
+  isReadyToCross(dist) {
+    if (helpers.checkArgsForNumber(dist)) return;
+    return this.availableDist - dist >= 0;
+  }
 
-MilitaryResource.prototype.isReadyToFight = function(damage) {
-  if (checkArgsForNumber(damage)) return;
-  return this.currentHealth - damage > 0;
-};
+  isReadyToFight(damage) {
+    if (checkArgsForNumber(damage)) return;
+    return this.currentHealth - damage > 0;
+  };
 
-MilitaryResource.prototype.restore = function() {
-  this.currentHealth = this.maxHealth;
-  this.availableDist = this.maxDist;
-};
-
+<<<<<<< HEAD
 MilitaryResource.prototype.clone = function() {
   var newResourcePrototype = Object.create(MilitaryResource.prototype);
   return Object.assign(newResourcePrototype, this);
 };
+=======
+  restore() {
+    this.currentHealth = this.maxHealth;
+    this.availableDist = this.maxDist;
+  };
+>>>>>>> 268f9b87abe8246c5517d47b129c1b3ef7175300
 
-MilitaryResource.prototype.attackedBy = function(resource) {
-  if(!resource) return;
-  this.currentHealth -= resource.damage;
-};
+  clone () {
+    var newResource = Object.create(MilitaryResource.prototype);
+        return Object.assign(newResource, this);
+  };
 
-MilitaryResource.prototype.addToDomRes = function(url) {
-  this.warrior = document.createElement("div");
-  this.warriorTitle = document.createElement("h2");
-  this.warriorBody = document.createElement("img");
+  attackedBy (resource) {
+    if(!resource) return;
+    this.currentHealth -= resource.damage;
+  };
 
-  this.warrior.classList.add("warrior");
+  addToDomRes (url) {
+    this.warrior = document.createElement("div");
+    this.warriorTitle = document.createElement("h2");
+    this.warriorBody = document.createElement("img");
+  
+    this.warrior.classList.add("warrior");
     this.warriorBody.src = url;
-
-  this.warriorTitle.innerHTML = this.name;
-
-  this.warrior.appendChild(this.warriorTitle);
-  this.warrior.appendChild(this.warriorBody);
-};
+  
+    this.warriorTitle.innerHTML = this.name;
+  
+    this.warrior.append(this.warriorTitle, this.warriorBody);
+  };
+}
 
 // var paladin = new MilitaryResource("paladin", 150, 800, 1500, "/src/img/paladin.png");
 // var assasin = new MilitaryResource("assasin", 300, 450, 1200, "/src/img/assasin.png");
