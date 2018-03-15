@@ -1,4 +1,3 @@
-import { isItMilitaryResource, checkExistingIndex, checkAvailablePos } from "../helpers";
 import * as helpers from "../helpers";
 
 // export default function Squad (completedResources, teamColor) {

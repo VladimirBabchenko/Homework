@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-var root = require("../../../helpers/root");
-// import checkArgsForNumber from "../helpers.js";
-// var helpers = require("../helpers");
-import {checkArgsForNumber} from "../helpers";
-=======
 import * as helpers from "../helpers";
->>>>>>> 268f9b87abe8246c5517d47b129c1b3ef7175300
 
 export default class MilitaryResource {
   constructor(name, damage, health, distance, url) {
@@ -26,17 +19,10 @@ export default class MilitaryResource {
     return this.currentHealth - damage > 0;
   };
 
-<<<<<<< HEAD
-MilitaryResource.prototype.clone = function() {
-  var newResourcePrototype = Object.create(MilitaryResource.prototype);
-  return Object.assign(newResourcePrototype, this);
-};
-=======
   restore() {
     this.currentHealth = this.maxHealth;
     this.availableDist = this.maxDist;
   };
->>>>>>> 268f9b87abe8246c5517d47b129c1b3ef7175300
 
   clone () {
     var newResource = Object.create(MilitaryResource.prototype);
