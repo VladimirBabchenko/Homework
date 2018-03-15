@@ -1,4 +1,7 @@
 var root = require("../../../helpers/root");
+// import checkArgsForNumber from "../helpers.js";
+// var helpers = require("../helpers");
+import {checkArgsForNumber} from "../helpers";
 
 export default function MilitaryResource(name, damage, health, distance, url) {
   this.name = name;
@@ -24,7 +27,8 @@ MilitaryResource.prototype.restore = function() {
 };
 
 MilitaryResource.prototype.clone = function() {
-  return Object.assign(this, {});
+  var newResourcePrototype = Object.create(MilitaryResource.prototype);
+  return Object.assign(newResourcePrototype, this);
 };
 
 MilitaryResource.prototype.attackedBy = function(resource) {

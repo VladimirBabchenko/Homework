@@ -17,8 +17,8 @@ module.exports = [
     template: "src/index.html"
   }),
   extractSass,
-  new UglifyJsPlugin({
-      sourceMap: true,
-      exclude: process.env.NODE_ENV === "development" ? "/../src/app.js": false
-  })
+  // new UglifyJsPlugin({
+  //     sourceMap: true,
+  //     exclude: process.env.NODE_ENV === "development" ? "/../src/app.js": false
+  // })
 ];
