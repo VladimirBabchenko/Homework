@@ -18,8 +18,8 @@ let obj = {
     }
 }
 
-for (let res of obj) {
-    console.log(res)
-}
+// for (let res of obj) {
+//     console.log(res)
+// }
 
 export default obj;

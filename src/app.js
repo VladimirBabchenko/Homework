@@ -3,6 +3,7 @@ import MilitaryResource from "./js/army/military-resource";
 import Squad from "./js/army/squad";
 import BattleGround from "./js/army/armies-battle";
 import symbolExample from "./js/symbols";
+import Car from "./js/iterator";
 
 var paladin = new MilitaryResource("paladin", 150, 800, 1500, "/src/img/paladin.png");
 var assasin = new MilitaryResource("assasin", 300, 450, 1200, "/src/img/assasin.png");
@@ -22,6 +23,5 @@ var vampire = new MilitaryResource("vampire", 150, 550, 1500, "/src/img/vampire.
 
 // battleTeams.fight();
 
-console.log(symbolExample);
 
 
