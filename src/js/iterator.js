@@ -28,9 +28,6 @@ class Car {
     }
 }
 
-let car = new Car();
-for (let key of car) {
-    console.log(key);
-}
+// let car = new Car();
 
 export default Car;
