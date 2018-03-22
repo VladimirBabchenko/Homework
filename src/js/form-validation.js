@@ -1,5 +1,5 @@
 document.querySelector(".login-form__username input").addEventListener("keyup", validateLogin);
-document.querySelector(".login-form__password-repeater ").addEventListener("keyup", checkPassword);
+document.querySelector(".login-form__password-repeater input").addEventListener("keyup", checkPassword);
 
 function showError(container, errorMessage) {
     container.querySelector(".error-message") && container.querySelector(".error-message").remove();
@@ -20,8 +20,12 @@ function validateReg(email) {
     return re.test(String(email).toLowerCase());
 }
 
-function validateRegPassword(password, anotherPass) {
-    return anotherPass.length >= 6;
+function validatePassLength(firstPass, secondPass) {
+    return /^.{6,}$/.test(String(firstPass));
+}
+
+function comparePassLength(firstPass, secondPass) {
+    return firstPass === secondPass;
 }
 
 function validateLogin() {
@@ -33,9 +37,9 @@ function validateLogin() {
 
 function checkPassword() {
     let parentBlock = this.parentNode;
-    let matchingValue = document.querySelector(".login-form__password").value;
+    let mainPass = document.querySelector(".login-form__password input").value;
     ResetError(parentBlock);
 
-    !validateRegPassword(this.value, matchingValue) && showError(parentBlock, "Password don't match ");
-    console.log(validateRegPassword(this.value, matchingValue));
+    !validatePassLength(mainPass, this.value) && showError(parentBlock, "Password must be more then 6 symbols");
+    !parentBlock.classList.contains("error") &&!comparePassLength(mainPass, this.value) && showError(parentBlock, "Passwords don't match"); 
 }
