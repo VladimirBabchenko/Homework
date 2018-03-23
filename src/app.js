@@ -24,5 +24,25 @@ import Car from "./js/iterator";
 
 // battleTeams.fight();
 
+const obj = {
+    a: 20,
+    b: 40,
+    c: {
+        f: 25,
+        d: {
+            l: 44
+        }
+    }
+}
+
+function copyObj(obj) {
+    let newObj = {};
+    for (let key in obj) {
+        newObj[key] = obj.hasOwnProperty(key) && typeof key === "object" ?
+        copyObj(key) : obj[key];
+    }
+    return newObj;
+}
 
 
+console.log(copyObj(obj));
