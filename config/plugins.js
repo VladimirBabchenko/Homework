@@ -14,7 +14,7 @@ module.exports = [
     name: "vendor"
   }),
   new HTMLWebpackPlugin({
-    template: "src/index.html"
+    template: "src/index.html",
   }),
   extractSass,
   // new UglifyJsPlugin({

@@ -1,11 +1,14 @@
-import * as style from "./scss/styles.scss";
+import  "./scss/styles.scss";
 import MilitaryResource from "./js/army/military-resource";
 import Squad from "./js/army/squad";
 import BattleGround from "./js/army/armies-battle";
 import symbolExample from "./js/symbols";
 import rekursiya from "./js/rekursiya";
-import formValidation from "./js/form-validation";
+// import  "./js/form-validation";
 import Car from "./js/iterator";
+import "./ts/liner";
+import "./ts/menu";
+import "./ts/tableSelection.js";
 
 // var paladin = new MilitaryResource("paladin", 150, 800, 1500, "/src/img/paladin.png");
 // var assasin = new MilitaryResource("assasin", 300, 450, 1200, "/src/img/assasin.png");
@@ -23,26 +26,31 @@ import Car from "./js/iterator";
 // battleTeams.fight();
 
 // battleTeams.fight();
-
-const obj = {
-    a: 20,
-    b: 40,
-    c: {
-        f: 25,
-        d: {
-            l: 44
-        }
-    }
-}
-
-function copyObj(obj) {
-    let newObj = {};
-    for (let key in obj) {
-        newObj[key] = obj.hasOwnProperty(key) && typeof key === "object" ?
-        copyObj(key) : obj[key];
-    }
-    return newObj;
-}
+// function getPromise(value) {
+//     return new Promise(res => {
+//         setTimeout(() => res(value + 10), 2000);
+//     })
+// }
 
 
-console.log(copyObj(obj));
+// function* generate() {
+//     let value1 = yield getPromise(10);
+//     let value2 = yield getPromise(value1);
+// }
+
+// function execute(generator, value) {
+//     let next = generator.next(value);
+//     if (!next.done) {
+//         next.value.then(res => execute(generator, res))
+//     } else {
+//         console.log(value);
+//     }
+// }
+
+// execute(generate());
+
+
+// let result = promisify("https://api.github.com/users/VladimirBabchenko")
+//     .then(value => console.log(value));
+
+
